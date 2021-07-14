@@ -7,9 +7,7 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,12 +19,14 @@
             android:layout_gravity="center"
             android:layout_marginTop="200px"
             app:srcCompat="@drawable/parking" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="179dp"
             android:gravity="center"
             android:text="Bienvenido"
+            android:textColor="#6B97E3"
             android:textSize="34sp" />
 
         <EditText
@@ -49,14 +49,19 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#5DCFDF"
             android:onClick="irMenuPrincipal"
-            android:text="Iniciar Sesión" />
+            android:text="Iniciar Sesión"
+            android:textColor="#1A1A71" />
+
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#7B30C5"
             android:onClick="irRegistro"
-            android:text="Registrarse" />
+            android:text="Registrarse"
+            android:textColor="#F3EDED" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
