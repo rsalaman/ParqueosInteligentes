@@ -78,8 +78,16 @@ public class MainActivity extends AppCompatActivity {
     public void onClickIniciarSesion(View v){
         String email = txt_email.getText().toString();
         String pass = txt_pass.getText().toString();
+        System.out.println(email + "\n" + pass);
+        if(!email.isEmpty() && !pass.isEmpty()){
+            iniciarSesion(email,pass);
 
-        iniciarSesion(email,pass);
+        }
+        else{
+            Toast.makeText(MainActivity.this, "Ingrese su usuario y contraseña",
+                    Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
