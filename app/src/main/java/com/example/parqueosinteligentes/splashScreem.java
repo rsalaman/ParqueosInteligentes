@@ -11,6 +11,7 @@ public class splashScreem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screem);
+        getSupportActionBar().hide();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -18,6 +19,6 @@ public class splashScreem extends AppCompatActivity {
                 startActivity(intent);
 
             }
-        }, 3000);
+        }, 5000);
     }
 }
