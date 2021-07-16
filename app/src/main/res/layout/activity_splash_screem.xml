@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     android:background="#3CC8CF"
     tools:context=".splashScreem">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="16dp">
+
         <ImageView
             android:id="@+id/iconP"
             android:layout_width="135dp"
@@ -21,11 +25,11 @@
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/loading"
-            android:layout_width="135dp"
-            android:layout_height="122dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginTop="400px"
-            app:srcCompat="@drawable/load" />
+            android:src="@drawable/load" />
 
 
     </LinearLayout>
