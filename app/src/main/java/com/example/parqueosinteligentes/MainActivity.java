@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText txt_email,txt_pass;
 
+    private Button btn_iniciar_sesion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +49,31 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        //Initializate Components
+        InitializateComponents();
+
+    }
+
+    private void InitializateComponents(){
         txt_email = (EditText) findViewById(R.id.editTextUsuario);
         txt_pass = (EditText) findViewById(R.id.editTextPass);
+
+        btn_iniciar_sesion = (Button) findViewById(R.id.btnLogin);
+        btn_iniciar_sesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = txt_email.getText().toString();
+                String pass = txt_pass.getText().toString();
+
+                if(!email.isEmpty() && !pass.isEmpty()){
+                    iniciarSesion(email,pass);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Ingrese su usuario y contraseña",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private void iniciarSesion(String email,String password){
@@ -58,15 +83,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            String correo_usuario = user.getEmail();
-                                    Toast.makeText(MainActivity.this, "Sesión iniciada",
-                                    Toast.LENGTH_SHORT).show();
-                            toMenuView(correo_usuario);
+                            //To Menu Activity
+                            Intent intent= new Intent(MainActivity.this, Menu.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecto.",
+                            Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta.",
                                     Toast.LENGTH_SHORT).show();
                             txt_pass.setText("");
                         }
@@ -74,28 +96,5 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
-    public void onClickIniciarSesion(View v){
-        String email = txt_email.getText().toString();
-        String pass = txt_pass.getText().toString();
-        System.out.println(email + "\n" + pass);
-        if(!email.isEmpty() && !pass.isEmpty()){
-            iniciarSesion(email,pass);
-
-        }
-        else{
-            Toast.makeText(MainActivity.this, "Ingrese su usuario y contraseña",
-                    Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-
-    public void toMenuView(String correo){
-        Intent intent= new Intent(this, Menu.class);
-        intent.putExtra("correo", correo);
-        startActivity(intent);
-    }
-
 
 }
