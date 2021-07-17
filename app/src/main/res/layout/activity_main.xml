@@ -51,8 +51,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#5DCFDF"
-            android:onClick="onClickIniciarSesion"
             android:text="Iniciar Sesión"
+            android:textColor="#1A1A71" />
+
+        <Button
+            android:id="@+id/btnLoginGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#5DCFDF"
+            android:text="Iniciar Sesión con Google"
             android:textColor="#1A1A71" />
 
         <Button
@@ -60,7 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#7B30C5"
-            android:onClick="irRegistro"
             android:text="Registrarse"
             android:textColor="#F3EDED" />
     </LinearLayout>
