@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="135dp"
@@ -34,24 +35,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
-            android:hint="Usuario" />
+            android:hint="Usuario"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/editTextPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
-            android:hint="Contraseña" />
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#5DCFDF"
-            android:onClick="irMenuPrincipal"
             android:text="Iniciar Sesión"
+            android:textColor="#1A1A71" />
+
+        <Button
+            android:id="@+id/btnLoginGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#5DCFDF"
+            android:text="Iniciar Sesión con Google"
             android:textColor="#1A1A71" />
 
         <Button
@@ -59,7 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#7B30C5"
-            android:onClick="irRegistro"
             android:text="Registrarse"
             android:textColor="#F3EDED" />
     </LinearLayout>
