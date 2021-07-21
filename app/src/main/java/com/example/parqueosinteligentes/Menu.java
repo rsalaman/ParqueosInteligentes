@@ -16,6 +16,7 @@ public class Menu extends AppCompatActivity {
     private TextView textViewNombre;
     private FirebaseAuth mAuth;
     private Button btnMapa;
+    private Button cerrarSesion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,17 @@ public class Menu extends AppCompatActivity {
 
         FirebaseUser user = mAuth.getCurrentUser();
         textViewNombre.setText(user.getEmail());
+        cerrarSesion = (Button) findViewById(R.id.btnCerrarSesion);
+
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                startActivity(new Intent(Menu.this,MainActivity.class));
+                finish();
+            }
+        });
+
     }
 
     private void InitializateComponents(){
