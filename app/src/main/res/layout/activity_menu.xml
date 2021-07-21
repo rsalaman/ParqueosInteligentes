@@ -25,5 +25,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Button
+            android:id="@+id/btnMapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="revisarMapa"
+            android:text="Ver Mapa" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
