@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
-    private void InitializateComponents(){
+    private void InitializateComponents(){//Dummy branch, the commits of the autor was upload directly on main branch
         txt_email = (EditText) findViewById(R.id.editTextUsuario);
         txt_pass = (EditText) findViewById(R.id.editTextPass);
 
