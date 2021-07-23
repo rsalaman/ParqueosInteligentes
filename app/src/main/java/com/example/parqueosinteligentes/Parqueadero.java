@@ -10,6 +10,9 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -25,11 +29,13 @@ import com.example.parqueosinteligentes.databinding.ActivityParqueaderoBinding;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarkerClickListener, OnMapReadyCallback,  AdapterView.OnItemSelectedListener {
 
     private GoogleMap mMap;
     private ActivityParqueaderoBinding binding;
+    private Spinner mMapTypeSelector;
     private static final int LOCATION_REQUEST_CODE = 1;
+
     //Ubicacion
     private final LatLng P1 = new LatLng(-2.144867790282449, -79.96717846116735);
     private final LatLng P2 = new LatLng(-2.1448744911068958, -79.96715499183959);
@@ -42,12 +48,22 @@ public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarke
     private Marker markerP3;
     private Marker markerP4;
     private Marker markerP;
+    private int mMapTypes[] = {
+            GoogleMap.MAP_TYPE_SATELLITE,
+            GoogleMap.MAP_TYPE_NORMAL,
+            GoogleMap.MAP_TYPE_HYBRID,
+            GoogleMap.MAP_TYPE_TERRAIN
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityParqueaderoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mMapTypeSelector = (Spinner) findViewById(R.id.map_type_selector);
+        mMapTypeSelector.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -106,26 +122,34 @@ public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarke
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         markerP1.setTag(0);
 
-        markerP2 =  mMap.addMarker(new MarkerOptions()
+        markerP2 = mMap.addMarker(new MarkerOptions()
                 .position(P2)
                 .title("P2")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         markerP2.setTag(0);
 
-        markerP3 =  mMap.addMarker(new MarkerOptions()
+        markerP3 = mMap.addMarker(new MarkerOptions()
                 .position(P3)
                 .title("P3")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         markerP3.setTag(0);
 
-        markerP4 =  mMap.addMarker(new MarkerOptions()
+        markerP4 = mMap.addMarker(new MarkerOptions()
                 .position(P4)
                 .title("P4")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         markerP4.setTag(0);
+//Posicion fiec
+        markerP = mMap.addMarker(new MarkerOptions()
+                .position(ParkingFiec)
+                .title("Parqueadero FIEC")
+                .snippet("ESPOL")
+        );
+        markerP4.setTag(0);
 
 
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ParkingFiec, 20));
+        mMap.setOnMarkerClickListener(this);
 
         //Poligono
         Polyline polyline1 = mMap.addPolyline((new PolylineOptions())
@@ -137,7 +161,7 @@ public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarke
                         new LatLng(-2.1448437654354664, -79.96718025742165),
                         new LatLng(-2.144877939640395, -79.9671956801227)
 
-        )
+                )
                 .color(Color.parseColor("#f44336")));
 
         polyline1.setTag("A1");
@@ -147,7 +171,7 @@ public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarke
 
                 .add(new LatLng(-2.144888660959436, -79.96717154024277),
                         new LatLng(-2.1448946917013525, -79.967154105885),
-                        new LatLng(-2.1448524765073884, -79.96714136539279 ),
+                        new LatLng(-2.1448524765073884, -79.96714136539279),
                         new LatLng(-2.1448477859302133, -79.967160140855),
                         new LatLng(-2.144888660959436, -79.96717154024277)
 
@@ -183,10 +207,14 @@ public class Parqueadero extends FragmentActivity implements   GoogleMap.OnMarke
         polyline4.setTag("A4");
 
 
+    }
 
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mMap.setMapType(mMapTypes[position]);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ParkingFiec,20));
-        mMap.setOnMarkerClickListener(this);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
     @Override
